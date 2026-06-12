@@ -46,17 +46,17 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: clamp(10px, 3vw, 20px);
         }
 
-        /* Device Container */
+        /* ========== RESPONSIVE DEVICE CONTAINER ========== */
         .device-container {
             width: 100%;
-            max-width: 360px;
-            height: 720px;
+            max-width: clamp(320px, 90vw, 420px);
+            aspect-ratio: 9 / 19.5;
             background: #000;
-            border-radius: 45px;
-            padding: 12px;
+            border-radius: clamp(24px, 6vw, 50px);
+            padding: clamp(8px, 2vw, 14px);
             box-shadow: 
                 0 0 60px rgba(0,0,0,0.9),
                 inset 0 0 0 2px rgba(255,255,255,0.1);
@@ -72,7 +72,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 40%;
-            height: 26px;
+            height: clamp(20px, 3vw, 30px);
             background: #000;
             border-radius: 0 0 20px 20px;
             z-index: 50;
@@ -82,7 +82,7 @@
             width: 100%;
             height: 100%;
             background: var(--bg-light);
-            border-radius: 40px;
+            border-radius: clamp(35px, 5vw, 45px);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -145,14 +145,14 @@
         }
 
         .login-header {
-            padding: 24px 20px;
+            padding: clamp(16px, 4vw, 24px) clamp(12px, 3vw, 20px);
             text-align: center;
             background: var(--bg-white);
             border-bottom: 1px solid var(--border-light);
         }
 
         .login-logo {
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             font-weight: 800;
             color: var(--primary-dark);
             letter-spacing: -0.5px;
@@ -164,7 +164,7 @@
 
         .login-content {
             flex: 1;
-            padding: 32px 20px;
+            padding: clamp(20px, 5vw, 32px) clamp(12px, 3vw, 20px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -173,13 +173,13 @@
         .login-hero {
             background: linear-gradient(135deg, #1B4D6B 0%, #2E6DA4 100%);
             border-radius: var(--radius-lg);
-            padding: 24px;
+            padding: clamp(16px, 3vw, 24px);
             color: white;
-            margin-bottom: 24px;
+            margin-bottom: clamp(16px, 3vw, 24px);
         }
 
         .login-hero h1 {
-            font-size: 20px;
+            font-size: clamp(16px, 3.5vw, 20px);
             font-weight: 800;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
@@ -190,20 +190,20 @@
         }
 
         .login-hero p {
-            font-size: 13px;
+            font-size: clamp(11px, 2vw, 13px);
             opacity: 0.9;
             line-height: 1.5;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .form-label {
             display: block;
-            font-size: 12px;
+            font-size: clamp(10px, 1.8vw, 12px);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-dark);
             text-transform: uppercase;
             letter-spacing: 0.3px;
@@ -211,11 +211,11 @@
 
         .form-input {
             width: 100%;
-            padding: 12px 14px;
+            padding: clamp(10px, 2.5vw, 12px) clamp(10px, 2vw, 14px);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-md);
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: clamp(13px, 2.5vw, 14px);
             background: var(--bg-white);
             color: var(--text-dark);
             transition: var(--transition);
@@ -232,10 +232,10 @@
         }
 
         .btn {
-            padding: 12px 16px;
+            padding: clamp(10px, 2.5vw, 12px) clamp(12px, 2.5vw, 16px);
             border: none;
             border-radius: var(--radius-md);
-            font-size: 14px;
+            font-size: clamp(12px, 2.2vw, 14px);
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -255,14 +255,14 @@
             background: var(--bg-light);
             color: var(--primary-dark);
             border: 2px solid var(--primary-dark);
-            margin-top: 8px;
+            margin-top: clamp(6px, 1.5vw, 8px);
         }
 
         .login-footer {
             text-align: center;
-            font-size: 12px;
+            font-size: clamp(10px, 1.8vw, 12px);
             color: var(--text-muted);
-            margin-top: 16px;
+            margin-top: clamp(12px, 2vw, 16px);
         }
 
         .login-footer a {
@@ -273,18 +273,18 @@
 
         /* ========== HEADER ========== */
         .header {
-            padding: 12px 16px;
+            padding: clamp(10px, 2.5vw, 12px) clamp(12px, 2.5vw, 16px);
             background: var(--bg-white);
             border-bottom: 1px solid var(--border-light);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
-            margin-top: 8px;
+            margin-top: clamp(6px, 1.5vw, 8px);
         }
 
         .header-logo {
-            font-size: 16px;
+            font-size: clamp(14px, 3vw, 16px);
             font-weight: 800;
             color: var(--primary-dark);
         }
@@ -295,12 +295,12 @@
 
         .header-icons {
             display: flex;
-            gap: 8px;
+            gap: clamp(6px, 1.5vw, 8px);
         }
 
         .icon-btn {
-            width: 32px;
-            height: 32px;
+            width: clamp(28px, 6vw, 32px);
+            height: clamp(28px, 6vw, 32px);
             border-radius: 50%;
             background: var(--bg-light);
             border: none;
@@ -308,9 +308,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: clamp(12px, 2.5vw, 14px);
             transition: var(--transition);
             position: relative;
+            min-width: clamp(28px, 6vw, 32px);
         }
 
         .icon-btn:active {
@@ -320,32 +321,32 @@
 
         /* ========== DASHBOARD ========== */
         .dashboard-header {
-            padding: 18px 16px;
+            padding: clamp(14px, 3vw, 18px) clamp(12px, 2.5vw, 16px);
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
             color: white;
         }
 
         .greeting {
-            font-size: 18px;
+            font-size: clamp(16px, 3.5vw, 18px);
             font-weight: 800;
             margin-bottom: 4px;
         }
 
         .greeting-sub {
-            font-size: 12px;
+            font-size: clamp(10px, 2vw, 12px);
             opacity: 0.85;
         }
 
         .dashboard-content {
-            padding: 16px;
+            padding: clamp(12px, 2.5vw, 16px);
         }
 
         .card {
             background: var(--bg-white);
             border-radius: var(--radius-lg);
-            padding: 14px;
+            padding: clamp(10px, 2.5vw, 14px);
             border: 1px solid var(--border-light);
-            margin-bottom: 12px;
+            margin-bottom: clamp(10px, 2vw, 12px);
             cursor: pointer;
             transition: var(--transition);
         }
@@ -366,7 +367,7 @@
         }
 
         .card-title {
-            font-size: 11px;
+            font-size: clamp(9px, 1.8vw, 11px);
             font-weight: 600;
             opacity: 0.85;
             margin-bottom: 6px;
@@ -375,66 +376,66 @@
         }
 
         .card-value {
-            font-size: 18px;
+            font-size: clamp(14px, 3.5vw, 18px);
             font-weight: 700;
             margin-bottom: 2px;
         }
 
         .card-subtitle {
-            font-size: 11px;
+            font-size: clamp(9px, 1.8vw, 11px);
             opacity: 0.75;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: clamp(8px, 2vw, 10px);
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .stat-item {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 12px;
+            padding: clamp(10px, 2vw, 12px);
             text-align: center;
         }
 
         .stat-number {
-            font-size: 16px;
+            font-size: clamp(14px, 3vw, 16px);
             font-weight: 700;
             color: var(--primary-dark);
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: clamp(9px, 1.8vw, 11px);
             color: var(--text-muted);
             margin-top: 4px;
         }
 
         .section {
-            margin-bottom: 18px;
+            margin-bottom: clamp(14px, 2.5vw, 18px);
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: clamp(12px, 2.5vw, 14px);
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: clamp(8px, 1.8vw, 10px);
             color: var(--text-dark);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: clamp(8px, 2vw, 10px);
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .service-card {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 12px;
+            padding: clamp(10px, 2vw, 12px);
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
@@ -446,18 +447,18 @@
         }
 
         .service-icon {
-            font-size: 28px;
+            font-size: clamp(20px, 5vw, 28px);
             margin-bottom: 6px;
         }
 
         .service-name {
-            font-size: 12px;
+            font-size: clamp(10px, 2vw, 12px);
             font-weight: 600;
             color: var(--text-dark);
         }
 
         .service-price {
-            font-size: 10px;
+            font-size: clamp(8px, 1.5vw, 10px);
             color: var(--text-muted);
             margin-top: 3px;
         }
@@ -466,8 +467,8 @@
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: clamp(10px, 2vw, 12px);
+            margin-bottom: clamp(8px, 2vw, 10px);
             cursor: pointer;
             transition: var(--transition);
         }
@@ -477,67 +478,67 @@
         }
 
         .blog-title {
-            font-size: 12px;
+            font-size: clamp(11px, 2.2vw, 12px);
             font-weight: 600;
             color: var(--text-dark);
             margin-bottom: 4px;
         }
 
         .blog-date {
-            font-size: 10px;
+            font-size: clamp(9px, 1.8vw, 10px);
             color: var(--text-muted);
         }
 
         /* ========== PAYMENT PAGE ========== */
         .payment-container {
-            padding: 16px;
+            padding: clamp(12px, 2.5vw, 16px);
         }
 
         .payment-title {
-            font-size: 18px;
+            font-size: clamp(16px, 3.5vw, 18px);
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .payment-summary {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 16px;
-            margin-bottom: 16px;
+            padding: clamp(12px, 2.5vw, 16px);
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .summary-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
-            font-size: 13px;
+            margin-bottom: clamp(8px, 1.5vw, 10px);
+            font-size: clamp(11px, 2vw, 13px);
         }
 
         .summary-row:last-child {
             margin-bottom: 0;
             border-top: 1px solid var(--border-light);
-            padding-top: 10px;
+            padding-top: clamp(8px, 1.5vw, 10px);
             font-weight: 700;
-            font-size: 14px;
+            font-size: clamp(12px, 2.2vw, 14px);
         }
 
         .payment-methods {
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .payment-method {
             background: var(--bg-white);
             border: 2px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 14px;
-            margin-bottom: 10px;
+            padding: clamp(10px, 2.5vw, 14px);
+            margin-bottom: clamp(8px, 2vw, 10px);
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: clamp(10px, 2vw, 12px);
         }
 
         .payment-method:active {
@@ -551,8 +552,8 @@
         }
 
         .payment-radio {
-            width: 20px;
-            height: 20px;
+            width: clamp(16px, 3.5vw, 20px);
+            height: clamp(16px, 3.5vw, 20px);
             border: 2px solid var(--border-light);
             border-radius: 50%;
             display: flex;
@@ -569,7 +570,7 @@
         .payment-radio::after {
             content: '✓';
             color: white;
-            font-size: 12px;
+            font-size: clamp(10px, 2vw, 12px);
             font-weight: 700;
             display: none;
         }
@@ -583,31 +584,31 @@
         }
 
         .payment-name {
-            font-size: 13px;
+            font-size: clamp(11px, 2.2vw, 13px);
             font-weight: 600;
             color: var(--text-dark);
         }
 
         .payment-desc {
-            font-size: 11px;
+            font-size: clamp(9px, 1.8vw, 11px);
             color: var(--text-muted);
             margin-top: 2px;
         }
 
         .payment-icon {
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
         }
 
         .promo-code {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 12px;
-            margin-bottom: 16px;
+            padding: clamp(10px, 2.5vw, 12px);
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .promo-label {
-            font-size: 11px;
+            font-size: clamp(9px, 1.8vw, 11px);
             font-weight: 600;
             text-transform: uppercase;
             color: var(--text-muted);
@@ -616,11 +617,11 @@
 
         .promo-input {
             width: 100%;
-            padding: 10px;
+            padding: clamp(8px, 2vw, 10px);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-md);
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: clamp(11px, 2vw, 13px);
         }
 
         .promo-input:focus {
@@ -630,30 +631,30 @@
 
         /* ========== OTHER PAGES ========== */
         .booking-section {
-            padding: 16px;
+            padding: clamp(12px, 2.5vw, 16px);
         }
 
         .booking-section h2 {
-            font-size: 16px;
+            font-size: clamp(14px, 3vw, 16px);
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: clamp(10px, 2vw, 12px);
         }
 
         .form-select {
             width: 100%;
-            padding: 10px;
+            padding: clamp(8px, 2vw, 10px);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-md);
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            margin-bottom: 12px;
+            font-size: clamp(11px, 2vw, 13px);
+            margin-bottom: clamp(10px, 2vw, 12px);
         }
 
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-bottom: 12px;
+            gap: clamp(3px, 0.8vw, 4px);
+            margin-bottom: clamp(10px, 2vw, 12px);
         }
 
         .calendar-day {
@@ -663,7 +664,7 @@
             justify-content: center;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-light);
-            font-size: 11px;
+            font-size: clamp(9px, 1.8vw, 11px);
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
@@ -682,17 +683,17 @@
 
         .time-slots {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
-            margin-bottom: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: clamp(5px, 1.5vw, 6px);
+            margin-bottom: clamp(10px, 2vw, 12px);
         }
 
         .time-slot {
-            padding: 10px;
+            padding: clamp(8px, 2vw, 10px);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-md);
             text-align: center;
-            font-size: 12px;
+            font-size: clamp(10px, 2vw, 12px);
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -708,8 +709,8 @@
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: clamp(10px, 2.5vw, 12px);
+            margin-bottom: clamp(8px, 2vw, 10px);
         }
 
         .dossier-header {
@@ -720,21 +721,21 @@
         }
 
         .dossier-title {
-            font-size: 12px;
+            font-size: clamp(11px, 2vw, 12px);
             font-weight: 600;
         }
 
         .dossier-date {
-            font-size: 10px;
+            font-size: clamp(9px, 1.8vw, 10px);
             color: var(--text-muted);
             margin-top: 2px;
         }
 
         .status-badge {
             display: inline-block;
-            padding: 3px 6px;
+            padding: clamp(2px, 0.8vw, 3px) clamp(4px, 1.5vw, 6px);
             border-radius: 4px;
-            font-size: 10px;
+            font-size: clamp(8px, 1.5vw, 10px);
             font-weight: 600;
             text-transform: uppercase;
         }
@@ -768,7 +769,7 @@
         }
 
         .message-bubble {
-            margin-bottom: 10px;
+            margin-bottom: clamp(8px, 2vw, 10px);
             animation: slideIn 0.3s ease-out;
         }
 
@@ -785,57 +786,57 @@
 
         .message-received {
             background: var(--border-light);
-            padding: 10px 12px;
+            padding: clamp(8px, 2vw, 10px) clamp(10px, 2vw, 12px);
             border-radius: var(--radius-lg);
             border-bottom-left-radius: 4px;
-            font-size: 12px;
+            font-size: clamp(11px, 2vw, 12px);
             max-width: 80%;
-            margin-bottom: 8px;
+            margin-bottom: clamp(6px, 1.5vw, 8px);
         }
 
         .message-sent {
             background: var(--primary-dark);
             color: white;
-            padding: 10px 12px;
+            padding: clamp(8px, 2vw, 10px) clamp(10px, 2vw, 12px);
             border-radius: var(--radius-lg);
             border-bottom-right-radius: 4px;
-            font-size: 12px;
+            font-size: clamp(11px, 2vw, 12px);
             max-width: 80%;
             margin-left: auto;
-            margin-bottom: 8px;
+            margin-bottom: clamp(6px, 1.5vw, 8px);
         }
 
         .document-item {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 10px;
-            margin-bottom: 8px;
+            padding: clamp(8px, 2vw, 10px);
+            margin-bottom: clamp(6px, 1.5vw, 8px);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .document-name {
-            font-size: 12px;
+            font-size: clamp(11px, 2vw, 12px);
             font-weight: 600;
             flex: 1;
         }
 
         .document-date {
-            font-size: 10px;
+            font-size: clamp(9px, 1.8vw, 10px);
             color: var(--text-muted);
         }
 
         .doc-btn {
-            width: 24px;
-            height: 24px;
+            width: clamp(20px, 4vw, 24px);
+            height: clamp(20px, 4vw, 24px);
             border: none;
             background: var(--bg-light);
             border-radius: 50%;
             cursor: pointer;
-            font-size: 12px;
-            margin-left: 6px;
+            font-size: clamp(10px, 2vw, 12px);
+            margin-left: clamp(4px, 1vw, 6px);
         }
 
         /* ========== BOTTOM NAV ========== */
@@ -844,13 +845,13 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 60px;
+            height: clamp(50px, 10vw, 70px);
             background: var(--bg-white);
             border-top: 1px solid var(--border-light);
             display: flex;
             justify-content: space-around;
             align-items: flex-start;
-            padding-top: 6px;
+            padding-top: clamp(4px, 1vw, 8px);
             z-index: 50;
             border-radius: 0 0 40px 40px;
         }
@@ -860,15 +861,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: clamp(2px, 1vw, 4px);
             cursor: pointer;
             border: none;
             background: none;
             color: var(--text-muted);
             font-family: 'Inter', sans-serif;
-            font-size: 10px;
+            font-size: clamp(8px, 1.5vw, 10px);
             font-weight: 600;
             transition: var(--transition);
+            padding: clamp(4px, 1vw, 6px);
         }
 
         .nav-item.active {
@@ -876,23 +878,23 @@
         }
 
         .nav-icon {
-            font-size: 16px;
+            font-size: clamp(12px, 3vw, 18px);
         }
 
         .badge {
-            width: 16px;
-            height: 16px;
+            width: clamp(14px, 3vw, 16px);
+            height: clamp(14px, 3vw, 16px);
             border-radius: 50%;
             background: var(--error);
             color: white;
-            font-size: 9px;
+            font-size: clamp(7px, 1.5vw, 9px);
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             position: absolute;
-            top: 3px;
-            right: 3px;
+            top: 2px;
+            right: 2px;
         }
 
         /* Modal */
@@ -915,7 +917,7 @@
             max-height: 70vh;
             background: var(--bg-white);
             border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            padding: 16px;
+            padding: clamp(12px, 2.5vw, 16px);
             overflow-y: auto;
         }
 
@@ -923,22 +925,46 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2.5vw, 16px);
         }
 
         .modal-title {
-            font-size: 16px;
+            font-size: clamp(14px, 3vw, 16px);
             font-weight: 700;
         }
 
         .modal-close {
-            width: 28px;
-            height: 28px;
+            width: clamp(24px, 5vw, 28px);
+            height: clamp(24px, 5vw, 28px);
             border-radius: 50%;
             background: var(--bg-light);
             border: none;
             cursor: pointer;
-            font-size: 14px;
+            font-size: clamp(12px, 2.5vw, 14px);
+        }
+
+        /* ========== TABLET & DESKTOP ========== */
+        @media (min-width: 768px) {
+            .device-container {
+                max-width: 450px;
+            }
+            
+            .bottom-nav {
+                height: 65px;
+                padding-top: 6px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .device-container {
+                max-width: 480px;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .device-container {
+                max-width: 520px;
+            }
         }
     </style>
 </head>
@@ -1034,8 +1060,8 @@
 
                             <div class="card" onclick="showPage('page-rendezvouz')">
                                 <div class="card-title">📅 Prochain rendez-vous</div>
-                                <div style="font-size: 13px; font-weight: 600; margin: 6px 0;">Mardi 18 juin • 10:00</div>
-                                <div style="font-size: 11px; color: var(--text-muted);">Conseil juridique avec Me Dia</div>
+                                <div style="font-size: clamp(11px, 2.5vw, 13px); font-weight: 600; margin: 6px 0;">Mardi 18 juin • 10:00</div>
+                                <div style="font-size: clamp(9px, 1.8vw, 11px); color: var(--text-muted);">Conseil juridique avec Me Dia</div>
                             </div>
 
                             <div class="card card-gradient accent" onclick="showPage('page-payment')">
@@ -1103,7 +1129,7 @@
                         <div class="section">
                             <div class="section-title">À propos de Synergia SN</div>
                             <div class="card">
-                                <div style="font-size: 13px; line-height: 1.5; color: var(--text-muted);">
+                                <div style="font-size: clamp(11px, 2vw, 13px); line-height: 1.5; color: var(--text-muted);">
                                     🏢 Cabinet d'assistance juridique et fiscale basé à Dakar<br><br>
                                     ✅ 8 associés pluridisciplinaires<br>
                                     ⚖️ Spécialistes OHADA & Droit du travail<br>
@@ -1180,8 +1206,8 @@
                 </div>
 
                 <div class="content">
-                    <div style="padding: 16px;">
-                        <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Mes dossiers</h2>
+                    <div style="padding: clamp(12px, 2.5vw, 16px);">
+                        <h2 style="font-size: clamp(14px, 3vw, 16px); font-weight: 700; margin-bottom: clamp(10px, 2vw, 12px);">Mes dossiers</h2>
 
                         <div class="dossier-item">
                             <div class="dossier-header">
@@ -1222,7 +1248,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary" style="margin-top: 12px;" onclick="showPage('page-dashboard')">Retour</button>
+                        <button class="btn btn-primary" style="margin-top: clamp(10px, 2vw, 12px);" onclick="showPage('page-dashboard')">Retour</button>
                     </div>
                 </div>
             </div>
@@ -1238,13 +1264,13 @@
                 </div>
 
                 <div class="content">
-                    <div style="padding: 16px;">
-                        <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">📦 Coffre-fort sécurisé</h2>
+                    <div style="padding: clamp(12px, 2.5vw, 16px);">
+                        <h2 style="font-size: clamp(14px, 3vw, 16px); font-weight: 700; margin-bottom: clamp(10px, 2vw, 12px);">📦 Coffre-fort sécurisé</h2>
 
-                        <button class="btn btn-primary" style="margin-bottom: 12px;">📁 Ajouter un document</button>
+                        <button class="btn btn-primary" style="margin-bottom: clamp(10px, 2vw, 12px);">📁 Ajouter un document</button>
 
-                        <div style="margin-bottom: 10px;">
-                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Documents récents</div>
+                        <div style="margin-bottom: clamp(8px, 2vw, 10px);">
+                            <div style="font-size: clamp(12px, 2.2vw, 13px); font-weight: 600; margin-bottom: clamp(8px, 2vw, 10px);">Documents récents</div>
                             <div class="document-item">
                                 <div>
                                     <div class="document-name">Statuts_SARL_Agri_Tech.pdf</div>
@@ -1290,7 +1316,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-secondary" style="margin-top: 12px;" onclick="showPage('page-dashboard')">Retour</button>
+                        <button class="btn btn-secondary" style="margin-top: clamp(10px, 2vw, 12px);" onclick="showPage('page-dashboard')">Retour</button>
                     </div>
                 </div>
             </div>
@@ -1306,21 +1332,21 @@
                 </div>
 
                 <div class="content">
-                    <div style="padding: 12px; border-bottom: 1px solid var(--border-light); margin-top: 8px;">
-                        <div style="font-size: 13px; font-weight: 700;">Me Dia</div>
-                        <div style="font-size: 11px; color: var(--text-muted);">Droit du travail • En ligne</div>
+                    <div style="padding: clamp(10px, 2vw, 12px); border-bottom: 1px solid var(--border-light); margin-top: clamp(6px, 1.5vw, 8px);">
+                        <div style="font-size: clamp(12px, 2.5vw, 13px); font-weight: 700;">Me Dia</div>
+                        <div style="font-size: clamp(10px, 1.8vw, 11px); color: var(--text-muted);">Droit du travail • En ligne</div>
                     </div>
 
-                    <div style="padding: 12px;">
+                    <div style="padding: clamp(10px, 2vw, 12px);">
                         <div class="message-received">Bonjour Mamadou 👋</div>
                         <div class="message-received">J'ai reçu vos documents. Je les examine et vous recontacterai demain avec mes recommandations.</div>
                         <div class="message-sent">Merci beaucoup Me Dia ! 🙏</div>
                         <div class="message-received">De rien ! À bientôt 👍</div>
                     </div>
 
-                    <div style="padding: 12px; border-top: 1px solid var(--border-light); display: flex; gap: 8px;">
-                        <textarea style="flex: 1; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 10px; font-family: 'Inter', sans-serif; font-size: 12px; resize: none; height: 36px;" placeholder="Votre message..."></textarea>
-                        <button style="width: 32px; height: 36px; background: var(--primary-dark); color: white; border: none; border-radius: 50%; cursor: pointer; font-size: 14px;">📤</button>
+                    <div style="padding: clamp(10px, 2vw, 12px); border-top: 1px solid var(--border-light); display: flex; gap: clamp(6px, 1.5vw, 8px);">
+                        <textarea style="flex: 1; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: clamp(8px, 2vw, 10px); font-family: 'Inter', sans-serif; font-size: clamp(11px, 2vw, 12px); resize: none; height: clamp(32px, 6vw, 40px);" placeholder="Votre message..."></textarea>
+                        <button style="width: clamp(28px, 5vw, 32px); height: clamp(32px, 6vw, 40px); background: var(--primary-dark); color: white; border: none; border-radius: 50%; cursor: pointer; font-size: clamp(12px, 2.5vw, 14px); flex-shrink: 0;">📤</button>
                     </div>
                 </div>
             </div>
@@ -1401,9 +1427,9 @@
                         <button class="btn btn-secondary" style="margin-top: 8px;" onclick="showPage('page-dashboard')">Annuler</button>
 
                         <!-- Security Info -->
-                        <div style="margin-top: 16px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-lg); border: 1px solid rgba(16, 185, 129, 0.3);">
-                            <div style="font-size: 12px; color: #059669; font-weight: 600;">🔒 Paiement sécurisé</div>
-                            <div style="font-size: 11px; color: #059669; margin-top: 4px;">Vos données sont chiffrées et sécurisées selon les normes PCI-DSS</div>
+                        <div style="margin-top: clamp(12px, 2.5vw, 16px); padding: clamp(10px, 2vw, 12px); background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-lg); border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div style="font-size: clamp(11px, 2vw, 12px); color: #059669; font-weight: 600;">🔒 Paiement sécurisé</div>
+                            <div style="font-size: clamp(9px, 1.8vw, 11px); color: #059669; margin-top: 4px;">Vos données sont chiffrées et sécurisées selon les normes PCI-DSS</div>
                         </div>
                     </div>
                 </div>
@@ -1444,7 +1470,7 @@
                 const dayEl = document.createElement('div');
                 dayEl.textContent = day;
                 dayEl.style.fontWeight = '600';
-                dayEl.style.fontSize = '11px';
+                dayEl.style.fontSize = 'clamp(10px, 2vw, 11px)';
                 dayEl.style.color = 'var(--text-muted)';
                 dayEl.style.textAlign = 'center';
                 calendar.appendChild(dayEl);
