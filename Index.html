@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synergia SN - Application Mobile Professionnelle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1B3A6B;
+            --primary-medium: #2E6DA4;
+            --accent-gold: #C9A84C;
+            --bg-light: #F8FAFB;
+            --bg-white: #FFFFFF;
+            --text-dark: #0F1419;
+            --text-muted: #6B7280;
+            --border-light: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F1419 0%, #1a2844 100%);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Device Container */
+        .device-container {
+            width: 100%;
+            max-width: 360px;
+            height: 720px;
+            background: #000;
+            border-radius: 45px;
+            padding: 12px;
+            box-shadow: 
+                0 0 60px rgba(0,0,0,0.9),
+                inset 0 0 0 2px rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 26px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 50;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-light);
+            border-radius: 40px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Scrollbar custom */
+        .content {
+            flex: 1;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-bottom: 70px;
+        }
+
+        .content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: var(--primary-medium);
+            border-radius: 3px;
+        }
+
+        .content::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== LOGIN PAGE ========== */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            background: var(--bg-light);
+        }
+
+        .login-header {
+            padding: 24px 20px;
+            text-align: center;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .login-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .login-logo span {
+            color: var(--accent-gold);
+        }
+
+        .login-content {
+            flex: 1;
+            padding: 32px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-hero {
+            background: linear-gradient(135deg, #1B4D6B 0%, #2E6DA4 100%);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .login-hero h1 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .login-hero h1 span {
+            color: var(--accent-gold);
+        }
+
+        .login-hero p {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            background: var(--bg-white);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-medium);
+            box-shadow: 0 0 0 3px rgba(46, 109, 164, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
+            color: white;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--primary-dark);
+            border: 2px solid var(--primary-dark);
+            margin-top: 8px;
+        }
+
+        .login-footer {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+
+        .login-footer a {
+            color: var(--primary-medium);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ========== HEADER ========== */
+        .header {
+            padding: 12px 16px;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .header-logo {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .header-logo span {
+            color: var(--accent-gold);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .icon-btn:active {
+            background: var(--border-light);
+            transform: scale(0.95);
+        }
+
+        /* ========== DASHBOARD ========== */
+        .dashboard-header {
+            padding: 18px 16px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
+            color: white;
+        }
+
+        .greeting {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .greeting-sub {
+            font-size: 12px;
+            opacity: 0.85;
+        }
+
+        .dashboard-content {
+            padding: 16px;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .card:active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-gradient {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
+            color: white;
+            border: none;
+        }
+
+        .card-gradient.accent {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #B8932F 100%);
+        }
+
+        .card-title {
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0.85;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .card-value {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .card-subtitle {
+            font-size: 11px;
+            opacity: 0.75;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .stat-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .service-card:active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .service-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .service-price {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .blog-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .blog-card:active {
+            box-shadow: var(--shadow-md);
+        }
+
+        .blog-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .blog-date {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ========== PAYMENT PAGE ========== */
+        .payment-container {
+            padding: 16px;
+        }
+
+        .payment-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .payment-summary {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .summary-row:last-child {
+            margin-bottom: 0;
+            border-top: 1px solid var(--border-light);
+            padding-top: 10px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .payment-methods {
+            margin-bottom: 16px;
+        }
+
+        .payment-method {
+            background: var(--bg-white);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .payment-method:active {
+            border-color: var(--primary-medium);
+            background: rgba(46, 109, 164, 0.05);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary-dark);
+            background: rgba(27, 58, 107, 0.05);
+        }
+
+        .payment-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .payment-method.selected .payment-radio {
+            border-color: var(--primary-dark);
+            background: var(--primary-dark);
+        }
+
+        .payment-radio::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            display: none;
+        }
+
+        .payment-method.selected .payment-radio::after {
+            display: block;
+        }
+
+        .payment-info {
+            flex: 1;
+        }
+
+        .payment-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .payment-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .payment-icon {
+            font-size: 24px;
+        }
+
+        .promo-code {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .promo-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .promo-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+        }
+
+        .promo-input:focus {
+            outline: none;
+            border-color: var(--primary-medium);
+        }
+
+        /* ========== OTHER PAGES ========== */
+        .booking-section {
+            padding: 16px;
+        }
+
+        .booking-section h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .calendar-day.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.selected {
+            background: var(--primary-dark);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .time-slot {
+            padding: 10px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .time-slot.selected {
+            background: var(--primary-dark);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+
+        .dossier-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .dossier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+
+        .dossier-title {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .dossier-date {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: #059669;
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: #D97706;
+        }
+
+        .status-completed {
+            background: rgba(6, 182, 212, 0.2);
+            color: #0891B2;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border-light);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+        }
+
+        .message-bubble {
+            margin-bottom: 10px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-received {
+            background: var(--border-light);
+            padding: 10px 12px;
+            border-radius: var(--radius-lg);
+            border-bottom-left-radius: 4px;
+            font-size: 12px;
+            max-width: 80%;
+            margin-bottom: 8px;
+        }
+
+        .message-sent {
+            background: var(--primary-dark);
+            color: white;
+            padding: 10px 12px;
+            border-radius: var(--radius-lg);
+            border-bottom-right-radius: 4px;
+            font-size: 12px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-bottom: 8px;
+        }
+
+        .document-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .document-name {
+            font-size: 12px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .document-date {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .doc-btn {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: var(--bg-light);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 6px;
+        }
+
+        /* ========== BOTTOM NAV ========== */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--bg-white);
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 6px;
+            z-index: 50;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-item.active {
+            color: var(--primary-dark);
+        }
+
+        .nav-icon {
+            font-size: 16px;
+        }
+
+        .badge {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--error);
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 3px;
+            right: 3px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .modal {
+            width: 100%;
+            max-height: 70vh;
+            background: var(--bg-white);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-container">
+        <div class="notch"></div>
+        
+        <div class="screen">
+            <!-- ========== LOGIN PAGE ========== -->
+            <div class="page active" id="page-login">
+                <div class="login-container">
+                    <div class="login-header">
+                        <div class="login-logo">Synergia<span>SN</span></div>
+                    </div>
+
+                    <div class="login-content">
+                        <div class="login-hero">
+                            <h1>Bienvenue sur <span>Synergia SN</span></h1>
+                            <p>Accès 24h/24 aux services juridiques et fiscaux au Sénégal</p>
+                        </div>
+
+                        <form onsubmit="handleLogin(event)">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" id="email-input" placeholder="votre@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Mot de passe</label>
+                                <input type="password" class="form-input" id="password-input" placeholder="••••••••" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Se connecter</button>
+                            <button type="button" class="btn btn-secondary" onclick="toggleForm()">Créer un compte</button>
+                        </form>
+
+                        <div class="login-footer">
+                            <a href="#">Mot de passe oublié ?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== DASHBOARD PAGE ========== -->
+            <div class="page" id="page-dashboard">
+                <div class="header">
+                    <div class="header-logo">Synergia<span>SN</span></div>
+                    <div class="header-icons">
+                        <button class="icon-btn" onclick="toggleNotifications()" style="position: relative;">
+                            🔔
+                            <div class="badge">2</div>
+                        </button>
+                        <button class="icon-btn" onclick="showUserMenu()">👤</button>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="dashboard-header">
+                        <div class="greeting">Bienvenue, Mamadou 👋</div>
+                        <div class="greeting-sub">Samedi 12 juin 2026</div>
+                    </div>
+
+                    <div class="dashboard-content">
+                        <!-- Key Stats -->
+                        <div class="section">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-number">3</div>
+                                    <div class="stat-label">Dossiers</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">1</div>
+                                    <div class="stat-label">Prochain RDV</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">150K</div>
+                                    <div class="stat-label">Solde</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">4</div>
+                                    <div class="stat-label">Documents</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Cards -->
+                        <div class="section">
+                            <div class="card card-gradient" onclick="showPage('page-dossiers')">
+                                <div class="card-title">📋 Dossiers</div>
+                                <div class="card-value">3 en cours</div>
+                                <div class="card-subtitle">Cliquez pour consulter le détail</div>
+                            </div>
+
+                            <div class="card" onclick="showPage('page-rendezvouz')">
+                                <div class="card-title">📅 Prochain rendez-vous</div>
+                                <div style="font-size: 13px; font-weight: 600; margin: 6px 0;">Mardi 18 juin • 10:00</div>
+                                <div style="font-size: 11px; color: var(--text-muted);">Conseil juridique avec Me Dia</div>
+                            </div>
+
+                            <div class="card card-gradient accent" onclick="showPage('page-payment')">
+                                <div class="card-title">💳 Solde abonnement</div>
+                                <div class="card-value">150 000 F</div>
+                                <div class="card-subtitle">Renouvellement: 15 juillet</div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="section">
+                            <button class="btn btn-primary" onclick="showPage('page-rendezvouz')" style="margin-bottom: 8px;">
+                                ➕ Nouveau rendez-vous
+                            </button>
+                            <button class="btn btn-primary" onclick="showPage('page-payment')">
+                                💳 Effectuer un paiement
+                            </button>
+                        </div>
+
+                        <!-- Services Overview -->
+                        <div class="section">
+                            <div class="section-title">Nos services</div>
+                            <div class="services-grid">
+                                <div class="service-card" onclick="bookService('conseil')">
+                                    <div class="service-icon">⚖️</div>
+                                    <div class="service-name">Conseil juridique</div>
+                                    <div class="service-price">15 000 F</div>
+                                </div>
+                                <div class="service-card" onclick="bookService('fiscal')">
+                                    <div class="service-icon">📊</div>
+                                    <div class="service-name">Assistance fiscale</div>
+                                    <div class="service-price">À partir de 50 000 F</div>
+                                </div>
+                                <div class="service-card" onclick="bookService('conformite')">
+                                    <div class="service-icon">✅</div>
+                                    <div class="service-name">Conformité</div>
+                                    <div class="service-price">Devis personnalisé</div>
+                                </div>
+                                <div class="service-card" onclick="bookService('formation')">
+                                    <div class="service-icon">🎓</div>
+                                    <div class="service-name">Formation PME</div>
+                                    <div class="service-price">200 000 F/demi-j.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Section -->
+                        <div class="section">
+                            <div class="section-title">Actualités juridiques</div>
+                            <div class="blog-card">
+                                <div class="blog-title">📢 Mesures DGID 2026 : Ce qu'il faut savoir</div>
+                                <div class="blog-date">Publié il y a 2 jours</div>
+                            </div>
+                            <div class="blog-card">
+                                <div class="blog-title">📖 Guide complet : Constitution OHADA</div>
+                                <div class="blog-date">Publié il y a 1 semaine</div>
+                            </div>
+                            <div class="blog-card">
+                                <div class="blog-title">⚖️ Nouvelles dispositions droit du travail</div>
+                                <div class="blog-date">Publié il y a 2 semaines</div>
+                            </div>
+                        </div>
+
+                        <!-- About Section -->
+                        <div class="section">
+                            <div class="section-title">À propos de Synergia SN</div>
+                            <div class="card">
+                                <div style="font-size: 13px; line-height: 1.5; color: var(--text-muted);">
+                                    🏢 Cabinet d'assistance juridique et fiscale basé à Dakar<br><br>
+                                    ✅ 8 associés pluridisciplinaires<br>
+                                    ⚖️ Spécialistes OHADA & Droit du travail<br>
+                                    📊 Expertise en fiscalité & conformité<br>
+                                    🎓 Formation PME & sensibilisation<br><br>
+                                    Accessibilité 24h/24 depuis tout le Sénégal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== RENDEZ-VOUS PAGE ========== -->
+            <div class="page" id="page-rendezvouz">
+                <div class="header">
+                    <div class="header-logo">Synergia<span>SN</span></div>
+                    <div class="header-icons">
+                        <button class="icon-btn">🔔</button>
+                        <button class="icon-btn">👤</button>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="booking-section">
+                        <h2>Prendre rendez-vous</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">Type de service</label>
+                            <select class="form-select">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="conseil">Conseil juridique (15 000 F)</option>
+                                <option value="fiscal">Assistance fiscale (50 000 F+)</option>
+                                <option value="conformite">Conformité réglementaire</option>
+                                <option value="formation">Formation PME (200 000 F)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Sélectionner un associé</label>
+                            <select class="form-select">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="dia">Me Dia (Droit du travail)</option>
+                                <option value="gueye">Me Guèye (Fiscalité)</option>
+                                <option value="ndiaye">Me Ndiaye (OHADA)</option>
+                                <option value="sarr">Me Sarr (Conformité)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Choisir une date</label>
+                            <div class="calendar-grid" id="calendar"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Heure de rendez-vous</label>
+                            <div class="time-slots" id="time-slots"></div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="confirmBooking()">Confirmer rendez-vous</button>
+                        <button class="btn btn-secondary" style="margin-top: 8px;" onclick="showPage('page-dashboard')">Annuler</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== DOSSIERS PAGE ========== -->
+            <div class="page" id="page-dossiers">
+                <div class="header">
+                    <div class="header-logo">Synergia<span>SN</span></div>
+                    <div class="header-icons">
+                        <button class="icon-btn">🔔</button>
+                        <button class="icon-btn">👤</button>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div style="padding: 16px;">
+                        <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Mes dossiers</h2>
+
+                        <div class="dossier-item">
+                            <div class="dossier-header">
+                                <div>
+                                    <div class="dossier-title">Création SARL - Agri Tech</div>
+                                    <div class="dossier-date">Ouvert depuis 3 semaines</div>
+                                </div>
+                                <span class="status-badge status-active">EN COURS</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dossier-item">
+                            <div class="dossier-header">
+                                <div>
+                                    <div class="dossier-title">Audit fiscal - SCI Immobilière</div>
+                                    <div class="dossier-date">Ouvert depuis 1 mois</div>
+                                </div>
+                                <span class="status-badge status-pending">EN ATTENTE</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%; background: var(--warning);"></div>
+                            </div>
+                        </div>
+
+                        <div class="dossier-item">
+                            <div class="dossier-header">
+                                <div>
+                                    <div class="dossier-title">Consultation RH - PME Textile</div>
+                                    <div class="dossier-date">Ouvert depuis 2 semaines</div>
+                                </div>
+                                <span class="status-badge status-completed">FINALISÉ</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%; background: #06B6D4;"></div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" style="margin-top: 12px;" onclick="showPage('page-dashboard')">Retour</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== DOCUMENTS PAGE ========== -->
+            <div class="page" id="page-documents">
+                <div class="header">
+                    <div class="header-logo">Synergia<span>SN</span></div>
+                    <div class="header-icons">
+                        <button class="icon-btn">🔔</button>
+                        <button class="icon-btn">👤</button>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div style="padding: 16px;">
+                        <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">📦 Coffre-fort sécurisé</h2>
+
+                        <button class="btn btn-primary" style="margin-bottom: 12px;">📁 Ajouter un document</button>
+
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Documents récents</div>
+                            <div class="document-item">
+                                <div>
+                                    <div class="document-name">Statuts_SARL_Agri_Tech.pdf</div>
+                                    <div class="document-date">2 juin 2026</div>
+                                </div>
+                                <div style="display: flex; gap: 4px;">
+                                    <button class="doc-btn">👁️</button>
+                                    <button class="doc-btn">⬇️</button>
+                                </div>
+                            </div>
+
+                            <div class="document-item">
+                                <div>
+                                    <div class="document-name">Attestation_Fiscale_2025.pdf</div>
+                                    <div class="document-date">28 mai 2026</div>
+                                </div>
+                                <div style="display: flex; gap: 4px;">
+                                    <button class="doc-btn">👁️</button>
+                                    <button class="doc-btn">⬇️</button>
+                                </div>
+                            </div>
+
+                            <div class="document-item">
+                                <div>
+                                    <div class="document-name">KBIS_2025.pdf</div>
+                                    <div class="document-date">15 mai 2026</div>
+                                </div>
+                                <div style="display: flex; gap: 4px;">
+                                    <button class="doc-btn">👁️</button>
+                                    <button class="doc-btn">⬇️</button>
+                                </div>
+                            </div>
+
+                            <div class="document-item">
+                                <div>
+                                    <div class="document-name">Déclaration_DGID_2025.pdf</div>
+                                    <div class="document-date">3 mai 2026</div>
+                                </div>
+                                <div style="display: flex; gap: 4px;">
+                                    <button class="doc-btn">👁️</button>
+                                    <button class="doc-btn">⬇️</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-secondary" style="margin-top: 12px;" onclick="showPage('page-dashboard')">Retour</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== MESSAGES PAGE ========== -->
+            <div class="page" id="page-messages">
+                <div class="header">
+                    <div class="header-logo">Synergia<span>SN</span></div>
+                    <div class="header-icons">
+                        <button class="icon-btn">🔔</button>
+                        <button class="icon-btn">👤</button>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div style="padding: 12px; border-bottom: 1px solid var(--border-light); margin-top: 8px;">
+                        <div style="font-size: 13px; font-weight: 700;">Me Dia</div>
+                        <div style="font-size: 11px; color: var(--text-muted);">Droit du travail • En ligne</div>
+                    </div>
+
+                    <div style="padding: 12px;">
+                        <div class="message-received">Bonjour Mamadou 👋</div>
+                        <div class="message-received">J'ai reçu vos documents. Je les examine et vous recontacterai demain avec mes recommandations.</div>
+                        <div class="message-sent">Merci beaucoup Me Dia ! 🙏</div>
+                        <div class="message-received">De rien ! À bientôt 👍</div>
+                    </div>
+
+                    <div style="padding: 12px; border-top: 1px solid var(--border-light); display: flex; gap: 8px;">
+                        <textarea style="flex: 1; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 10px; font-family: 'Inter', sans-serif; font-size: 12px; resize: none; height: 36px;" placeholder="Votre message..."></textarea>
+                        <button style="width: 32px; height: 36px; background: var(--primary-dark); color: white; border: none; border-radius: 50%; cursor: pointer; font-size: 14px;">📤</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== PAYMENT PAGE ========== -->
+            <div class="page" id="page-payment">
+                <div class="header">
+                    <div class="header-logo">Synergia<span>SN</span></div>
+                    <div class="header-icons">
+                        <button class="icon-btn">🔔</button>
+                        <button class="icon-btn">👤</button>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="payment-container">
+                        <h2 class="payment-title">💳 Paiement en ligne</h2>
+
+                        <!-- Summary -->
+                        <div class="payment-summary">
+                            <div class="summary-row">
+                                <span>Assistance fiscale</span>
+                                <span>50 000 F</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>TVA (18%)</span>
+                                <span>9 000 F</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Total TTC</span>
+                                <span style="color: var(--primary-dark);">59 000 F</span>
+                            </div>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="promo-code">
+                            <div class="promo-label">Code promo (optionnel)</div>
+                            <input type="text" class="promo-input" placeholder="Entrez votre code">
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="payment-methods">
+                            <div class="payment-method selected" onclick="selectPaymentMethod(this, 'wave')">
+                                <div class="payment-radio"></div>
+                                <div class="payment-info">
+                                    <div class="payment-name">📱 Wave</div>
+                                    <div class="payment-desc">Paiement par téléphone mobile</div>
+                                </div>
+                            </div>
+
+                            <div class="payment-method" onclick="selectPaymentMethod(this, 'orange')">
+                                <div class="payment-radio"></div>
+                                <div class="payment-info">
+                                    <div class="payment-name">📱 Orange Money</div>
+                                    <div class="payment-desc">Service de paiement mobile Orange</div>
+                                </div>
+                            </div>
+
+                            <div class="payment-method" onclick="selectPaymentMethod(this, 'freemoney')">
+                                <div class="payment-radio"></div>
+                                <div class="payment-info">
+                                    <div class="payment-name">📱 Free Money</div>
+                                    <div class="payment-desc">Portefeuille mobile Free Senegal</div>
+                                </div>
+                            </div>
+
+                            <div class="payment-method" onclick="selectPaymentMethod(this, 'card')">
+                                <div class="payment-radio"></div>
+                                <div class="payment-info">
+                                    <div class="payment-name">💳 Carte bancaire</div>
+                                    <div class="payment-desc">Visa, MasterCard, American Express</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <button class="btn btn-primary" onclick="processPayment()">Effectuer le paiement</button>
+                        <button class="btn btn-secondary" style="margin-top: 8px;" onclick="showPage('page-dashboard')">Annuler</button>
+
+                        <!-- Security Info -->
+                        <div style="margin-top: 16px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-lg); border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div style="font-size: 12px; color: #059669; font-weight: 600;">🔒 Paiement sécurisé</div>
+                            <div style="font-size: 11px; color: #059669; margin-top: 4px;">Vos données sont chiffrées et sécurisées selon les normes PCI-DSS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <button class="nav-item active" onclick="switchNav('dashboard')">
+                    <span class="nav-icon">🏠</span>
+                    Accueil
+                </button>
+                <button class="nav-item" onclick="switchNav('documents')">
+                    <span class="nav-icon">📦</span>
+                    Documents
+                </button>
+                <button class="nav-item" onclick="switchNav('messages')">
+                    <span class="nav-icon">💬</span>
+                    Messages
+                </button>
+                <button class="nav-item" onclick="switchNav('payment')">
+                    <span class="nav-icon">💳</span>
+                    Paiement
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Calendar initialization
+        function initCalendar() {
+            const calendar = document.getElementById('calendar');
+            if (!calendar) return;
+            
+            calendar.innerHTML = '';
+            
+            const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+            days.forEach(day => {
+                const dayEl = document.createElement('div');
+                dayEl.textContent = day;
+                dayEl.style.fontWeight = '600';
+                dayEl.style.fontSize = '11px';
+                dayEl.style.color = 'var(--text-muted)';
+                dayEl.style.textAlign = 'center';
+                calendar.appendChild(dayEl);
+            });
+
+            for (let i = 1; i <= 30; i++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                dayEl.textContent = i;
+                
+                if (i < 10) {
+                    dayEl.classList.add('disabled');
+                }
+                
+                dayEl.onclick = function() {
+                    document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
+                    if (!this.classList.contains('disabled')) {
+                        this.classList.add('selected');
+                    }
+                };
+                
+                calendar.appendChild(dayEl);
+            }
+        }
+
+        // Time slots initialization
+        function initTimeSlots() {
+            const slots = document.getElementById('time-slots');
+            if (!slots) return;
+            
+            const times = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
+            slots.innerHTML = '';
+            
+            times.forEach(time => {
+                const slot = document.createElement('div');
+                slot.className = 'time-slot';
+                slot.textContent = time;
+                slot.onclick = function() {
+                    document.querySelectorAll('.time-slot.selected').forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                };
+                slots.appendChild(slot);
+            });
+        }
+
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            if (pageId === 'page-rendezvouz') {
+                setTimeout(() => {
+                    initCalendar();
+                    initTimeSlots();
+                }, 100);
+            }
+            
+            const content = document.querySelector('.content');
+            if (content) content.scrollTop = 0;
+        }
+
+        // Navigation
+        function switchNav(section) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+
+            const pageMap = {
+                'dashboard': 'page-dashboard',
+                'documents': 'page-documents',
+                'messages': 'page-messages',
+                'payment': 'page-payment'
+            };
+
+            showPage(pageMap[section]);
+        }
+
+        // Login
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-input').value;
+            showPage('page-dashboard');
+        }
+
+        // Booking
+        function bookService(serviceName) {
+            showPage('page-rendezvouz');
+        }
+
+        function confirmBooking() {
+            alert('✅ Rendez-vous confirmé ! Un SMS de confirmation sera envoyé à votre numéro.');
+            showPage('page-dashboard');
+        }
+
+        // Notifications
+        function toggleNotifications() {
+            alert('📬 Notifications:\n\n1. Rappel RDV demain à 10:00\n2. Nouveau document reçu de Me Guèye');
+        }
+
+        // User menu
+        function showUserMenu() {
+            alert('Menu utilisateur\n\n👤 Mon profil\n🔐 Sécurité\n⚙️ Paramètres\n🚪 Déconnexion');
+        }
+
+        // Payment
+        function selectPaymentMethod(element, method) {
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function processPayment() {
+            const selected = document.querySelector('.payment-method.selected');
+            if (!selected) {
+                alert('Veuillez sélectionner une méthode de paiement');
+                return;
+            }
+            
+            const method = selected.querySelector('.payment-name').textContent;
+            alert(`✅ Redirection vers ${method}...\n\nTransaction: 59 000 F FCFA\nStatut: En cours de traitement...`);
+        }
+
+        // Toggle form
+        function toggleForm() {
+            alert('Formulaire d\'inscription\n\nCette fonctionnalité complète sera disponible prochainement.');
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            initCalendar();
+            initTimeSlots();
+        });
+    </script>
+</body>
+</html>
